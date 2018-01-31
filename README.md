@@ -1,18 +1,30 @@
 # megaplan-commerceml
 
-Example to import leads from site/landing to megaplan
+This module for site/landing to send leads to megaplan directly.
+
+Based on:
+
+https://dev.megaplan.ru
 
 https://help.megaplan.ru/API_bibles
 
 https://help.megaplan.ru/API_online_store
 
-1. Setup auth data 
+
+Before use, set up auth data 
 
 /resourses/params.php
 (see example file).
 
-2. Run CommerceML intergation:
+v1 CommerceML integration /example-commerceml.php
 
-/example-commerceml.php
+— Cannot send phone or email
 
-3. Run direct API import: /example-api-integration.php
+— Cannot change client/deal manager
+ 
+— Cannot choise deal scheme (if more 1 scheme in megaplan) 
+
+
+v2 Direct API import: /example-api-integration.php
+
+All work correctly!
