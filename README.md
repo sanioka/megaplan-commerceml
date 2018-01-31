@@ -14,3 +14,5 @@ https://help.megaplan.ru/API_online_store
 2. Run CommerceML intergation:
 
 /example-commerceml.php
+
+3. Run direct API import: /example-api-integration.php
