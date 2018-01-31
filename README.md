@@ -10,21 +10,24 @@ https://help.megaplan.ru/API_bibles
 
 https://help.megaplan.ru/API_online_store
 
-
-Before use, set up auth data 
+#### Before using, set up auth data 
 
 /resourses/params.php
 (see example file).
 
-v1 CommerceML integration /example-commerceml.php
+#### v1 CommerceML integration (from official package)
 
-— Cannot send phone or email
+Run /example-commerceml.php script.
 
-— Cannot change client/deal manager
+— Cannot send phone or email.
+
+— Cannot change client/deal manager.
  
-— Cannot choise deal scheme (if more 1 scheme in megaplan) 
+— Cannot choise deal scheme (if more 1 scheme in megaplan). 
 
 
-v2 Direct API import: /example-api-integration.php
+#### v2 Direct API integration (custom code, based on official API)
 
-All work correctly!
+Run /example-api-integration.php script.
+
+Everything works correctly!
