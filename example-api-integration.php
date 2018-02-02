@@ -17,6 +17,7 @@ $params = [
     // Какого сотрудника назначать ответственным, внутренний Id мегаплана
     'staff' => [
         'ivanov' => 1000026,
+        'api-user' => 1000114,
     ]
 ];
 
@@ -24,7 +25,7 @@ $params = [
 $leadData = [
     'fio' => 'Петров Тестовый Лид',         // required
     'dealId' => $params['deals']['ddu'],    // required
-    'manager' => $params['staff']['ivanov'],// required
+    'manager' => $params['staff']['api-user'],// required
 
     // not required fields
     'phone' => '+7 (926) 000-00-00',
@@ -60,17 +61,16 @@ $request = new SdfApi_Request($accessId, $secretKey, $host, true);
 /**
  * Создаём клиента
  */
-
 $requestData = [
-    'Model[TypePerson]' => 'company',
-    'Model[CompanyName]' => $leadData['fio'],
-    'Model[Responsibles]' => $leadData['manager'],
+    'Model[TypePerson]' => 'company',               // Тип клиента, компания
+    'Model[CompanyName]' => $leadData['fio'],       // ФИО клиента
+    'Model[Responsibles]' => $leadData['manager'],  // Ответственный по клиенту
 ];
 if (!empty($leadData['email'])) {
-    $requestData['Model[Email]'] = $leadData['email'];
+    $requestData['Model[Email]'] = $leadData['email']; // Email клиента
 }
 if (!empty($leadData['phone'])) {
-    $requestData['Model[Phones]'] = [$leadData['phone']];
+    $requestData['Model[Phones]'] = [$leadData['phone']]; // Телефон клиента, может быть несколько
 }
 
 $response = $request->post('/BumsCrmApiV01/Contractor/save.api', $requestData);
@@ -84,19 +84,19 @@ if (!empty($responseData->status->code && $responseData->status->code == 'ok')) 
     die;
 }
 
+
 /**
  * Создаём сделку
  */
-
 if (!empty($clientId)) {
 
     $requestData = [
-        'ProgramId' => $leadData['dealId'],
-        'Model[Contractor]' => $clientId,
-        'Model[Manager]' => $leadData['manager'],
+        'ProgramId' => $leadData['dealId'],         // ID схемы сделки
+        'Model[Contractor]' => $clientId,           // ID клиента, для которого создаётся сделка
+        'Model[Manager]' => $leadData['manager'],   // Ответственный по сделке
     ];
     if (!empty($leadData['data'])) {
-        $requestData['Model[Description]'] = $leadData['data'];
+        $requestData['Model[Description]'] = $leadData['data']; // Дополнительная информация по лиду
     }
 
     $response = $request->post('/BumsTradeApiV01/Deal/save.api', $requestData);
