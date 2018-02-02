@@ -15,17 +15,21 @@ $params = [
     ],
 
     // Какого сотрудника назначать ответственным, внутренний Id мегаплана
-    'staff' => [
-        'ivanov' => 1000026,
-        'api-user' => 1000114,
-    ]
+//    'staff' => [
+//        'ivanov' => 1000026,
+//        'api-user' => 1000114,
+//    ]
 ];
 
 // Данные, которые приходят с леднига
 $leadData = [
     'fio' => 'Петров Тестовый Лид',         // required
     'dealId' => $params['deals']['ddu'],    // required
-    'manager' => $params['staff']['api-user'],// required
+
+    // по умолчанию, сделки и клиенты создаются от имени пользователя,
+    // под которым произошла авторизация с API
+//    'manager' => $params['staff']['api-user'],
+
 
     // not required fields
     'phone' => '+7 (926) 000-00-00',
@@ -64,7 +68,7 @@ $request = new SdfApi_Request($accessId, $secretKey, $host, true);
 $requestData = [
     'Model[TypePerson]' => 'company',               // Тип клиента, компания
     'Model[CompanyName]' => $leadData['fio'],       // ФИО клиента
-    'Model[Responsibles]' => $leadData['manager'],  // Ответственный по клиенту
+//    'Model[Responsibles]' => $leadData['manager'],  // Ответственный по клиенту
 ];
 if (!empty($leadData['email'])) {
     $requestData['Model[Email]'] = $leadData['email']; // Email клиента
@@ -93,7 +97,7 @@ if (!empty($clientId)) {
     $requestData = [
         'ProgramId' => $leadData['dealId'],         // ID схемы сделки
         'Model[Contractor]' => $clientId,           // ID клиента, для которого создаётся сделка
-        'Model[Manager]' => $leadData['manager'],   // Ответственный по сделке
+//        'Model[Manager]' => $leadData['manager'],   // Ответственный по сделке
     ];
     if (!empty($leadData['data'])) {
         $requestData['Model[Description]'] = $leadData['data']; // Дополнительная информация по лиду
