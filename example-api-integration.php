@@ -19,6 +19,16 @@ $params = [
 //        'ivanov' => 1000026,
 //        'api-user' => 1000114,
 //    ]
+
+    'cities' => [
+        'msk' => 'Москва',
+        'spb' => 'Санкт-Петербург',
+        'kaliningrad' => 'Калининград',
+        'nnov' => 'Нижний Новгород',
+
+        'undefined' => 'Не определенo',
+        'test' => 'Тестовый город',
+    ]
 ];
 
 // Данные, которые приходят с леднига
@@ -36,6 +46,7 @@ $leadData = [
     'email' => 'test@mail.local',
     'data' => "Описание лида\n
                Вторая строка",
+    'city' => $params['cities']['test'],
 ];
 
 // Подключаем библиотеку API
@@ -75,6 +86,9 @@ if (!empty($leadData['email'])) {
 }
 if (!empty($leadData['phone'])) {
     $requestData['Model[Phones]'] = [$leadData['phone']]; // Телефон клиента, может быть несколько
+}
+if (!empty($leadData['city'])) {
+    $requestData['Model[Category183CustomFieldLandingGorod]'] = $leadData['city']; // Город клиента
 }
 
 $response = $request->post('/BumsCrmApiV01/Contractor/save.api', $requestData);
